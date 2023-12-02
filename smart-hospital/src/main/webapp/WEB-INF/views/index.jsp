@@ -13,7 +13,7 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Now enjoy our quality services online. Add your details and book appointments online with your favorite doctor.</p>
       <div class="d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 mr-2 mb-2" onclick="location.href='/add-patient'">Add Patient Details</button>
+        <button type="button" class="btn btn-primary btn-lg px-4 mr-2 mb-2" onclick="location.href='/patient/add-patient'">Add Patient Details</button>
         <button type="button" class="btn btn-primary btn-lg px-4 mr-2 mb-2" onclick="location.href='/patient/list'">Browse Patients</button>
         <button type="button" class="btn btn-primary btn-lg px-4 mb-2">Book Appointment</button>
       </div>

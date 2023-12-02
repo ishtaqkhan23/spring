@@ -11,4 +11,13 @@ public class Notification {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
+    public void postContructConfig() {
+        System.out.println("post construct called");
+    }
+
+    public void preDestroyConfig(){
+        System.out.println("pre destroy config");
+    }
 }

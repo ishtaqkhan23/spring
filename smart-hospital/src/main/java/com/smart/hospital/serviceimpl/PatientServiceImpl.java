@@ -27,7 +27,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient getPatientById(Long id) {
+    public Patient getPatientById(Integer id) {
         return patientDAO.getPatientById(id);
     }
 
@@ -42,7 +42,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void deletePatient(Long id) {
+    public void deletePatient(Integer id) {
         patientDAO.deletePatient(id);
     }
 }

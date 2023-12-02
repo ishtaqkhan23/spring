@@ -11,8 +11,11 @@
 
 <body>
     <div class="px-4 py-5 my-5 text-center">
-        <p>${notificationMsg}</p>
-        <p>${url}</p>
+
+        <div class="alert alert-primary" role="alert">
+              <p>${notificationMsg}</p>
+        </div>
+        <!-- ${url} -->
         <table class="table table-hover">
           <thead>
             <tr>
@@ -25,6 +28,10 @@
                 <tr>
                       <td>${patient.name}</td>
                       <td>${patient.email}</td>
+                      <td><button type="button" class="btn btn-primary"
+                                              onclick="location.href='/patient/edit/${patient.id}'">Edit</button></td>
+                      <td><button type="button" class="btn btn-danger"
+                        onclick="location.href='/patient/delete/${patient.id}'">Delete</button></td>
                 </tr>
             </c:forEach>
            </tbody>

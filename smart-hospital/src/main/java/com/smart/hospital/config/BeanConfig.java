@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfig {
 
-    @Bean
+    @Bean(initMethod = "postContructConfig", destroyMethod = "preDestroyConfig")
     public Notification notificationBeanProvider(){
         Notification notification = new Notification();
         notification.setMessage("Hello, you have a new notification.");

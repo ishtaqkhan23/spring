@@ -24,9 +24,13 @@ public class PatientController {
 
     @Autowired
     private DBConfig dbConfig;
+
+
     
+    //@RequestMapping(method = RequestMethod.GET, path = "/list")
     @GetMapping("/list")
     public String list(Model model) {
+
         List<Patient> patientList = patientService.getAllPatients();
         model.addAttribute("patientList", patientList);
 
@@ -35,22 +39,55 @@ public class PatientController {
         model.addAttribute("url", dbConfig.getUrl());
         return "patient-list";
     }
+    //prefix - /WEB-INF/views/
+    //sufix - .jsp
+    // /WEB-INF/view/patient-list.jsp
+
+
+    /*@GetMapping("/add-patient")
+    public String addPatient(){
+        return "add-patient";
+    }*/
 
     @PostMapping("/add")
     public String add(@ModelAttribute("patient") Patient patient, Model model) {
         patientService.addPatient(patient);
-        model.addAttribute("message", "Successfully Added");
-        return "add-patient";
+
+        model.addAttribute("notificationMsg", "Successfully Added");
+        List<Patient> patientList = patientService.getAllPatients();
+        model.addAttribute("patientList", patientList);
+        return "patient-list";
     }
 
-    @PostMapping("/update")
-    public String update(@ModelAttribute("patient") Patient patient) {
-        // implementation
-        return null;
+    @GetMapping("/edit/{id}")
+    public String editPatient(@PathVariable("id") Integer id, Model model){
+        Patient patient = patientService.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "edit-patient-details";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id) {
+
+    @PutMapping("/update")
+    public String update(@ModelAttribute("patient") Patient patient, Model model) {
+        patientService.updatePatient(patient);
+
+        model.addAttribute("notificationMsg", "Successfully Updated");
+        List<Patient> patientList = patientService.getAllPatients();
+        model.addAttribute("patientList", patientList);
+        return "patient-list";
+    }
+
+    @GetMapping("/delete/{id}") //delete
+    public String deletePathParam(@PathVariable("id") Integer id, Model model) {
+        patientService.deletePatient(id);
+
+        model.addAttribute("notificationMsg", "Successfully Deleted");
+        List<Patient> patientList = patientService.getAllPatients();
+        model.addAttribute("patientList", patientList);
+        return "patient-list";
+    }
+
+    public String deleteQueryParam(@RequestParam("id") Long id) {
         // implementation
         return null;
     }

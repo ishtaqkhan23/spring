@@ -5,25 +5,25 @@ import com.smart.hospital.model.Patient;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class PatientDAOImpl implements PatientDAO {
 
-    List<Patient> patients;
+    static List<Patient> patients = new ArrayList<>();
+
+    static {
+        patients.add(new Patient(1, "ish", "abc@xyz.com"));
+        patients.add(new Patient(2, "nawaz","abcd@ww.com"));
+    }
 
     @Override
     public List<Patient> getAllPatients() {
-        Patient p = new Patient();
-        p.setName("ishtaq");
-        p.setEmail("abc@xyz.com");
-        patients = Arrays.asList(p);
         return patients;
     }
 
     @Override
-    public Patient getPatientById(Long id) {
+    public Patient getPatientById(Integer id) {
         Patient patient = null;
         for(Patient patientObj: patients){
             if(patientObj.getId().equals(id)) {
@@ -35,20 +35,19 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public void addPatient(Patient patient) {
-        if(patients == null) {
-            patients = new ArrayList<>();
-        }
         patients.add(patient);
     }
 
     @Override
     public void updatePatient(Patient patient) {
-        int indexOfPatientToBeUpdated = patients.indexOf(patient);
+        Patient patientToBeUpdated = getPatientById(patient.getId());
+        int indexOfPatientToBeUpdated = patients.indexOf(patientToBeUpdated);
         patients.add(indexOfPatientToBeUpdated, patient);
+        patients.remove(indexOfPatientToBeUpdated + 1);
     }
 
     @Override
-    public void deletePatient(Long id) {
+    public void deletePatient(Integer id) {
         Patient patienToBeDeleted = null;
         for(Patient patient: patients){
             if(patient.getId().equals(id)) {
